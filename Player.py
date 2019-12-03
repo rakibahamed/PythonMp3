@@ -51,6 +51,8 @@ def updatelabel():
 def nextsong(event):
     global index
     index += 1
+    if index >= (len(listofsongs)-1):
+        index = 0
     pygame.mixer.music.load(listofsongs[index])
     pygame.mixer.music.play()
     updatelabel()
@@ -58,6 +60,8 @@ def nextsong(event):
 def prevsong(event):
     global index
     index -= 1
+    if index < 0:
+        index = len(listofsongs)-1
     pygame.mixer.music.load(listofsongs[index])
     pygame.mixer.music.play()
     updatelabel()
