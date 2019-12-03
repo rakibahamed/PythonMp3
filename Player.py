@@ -69,22 +69,6 @@ def playsong(event):
     index = event
     pygame.mixer.music.load(listofsongs[index])
     pygame.mixer.music.play()
-<<<<<<< HEAD
-    #pygame.mixer.music.stop()
-    create_listbox()
-
-def create_listbox():
-    listbox = Listbox(root)
-    for i in range(0, len(listofsongs)):
-        listbox.insert(i, listofsongs[i])
-    listbox.pack()
-
-
-
-lable = Label(root, text = "Music Player")
-lable.pack()
-
-=======
     updatelabel()
 
 
@@ -98,7 +82,6 @@ realnames.reverse()
 
 for items in realnames:
     listbox.insert(0,items)
->>>>>>> 33974d8f54037c695ad783cf1401efa98f6e51c1
 
 realnames.reverse()
 
@@ -126,9 +109,6 @@ def fileSelection(self):
     playsong(selection[0])
 
 
-<<<<<<< HEAD
-root.mainloop()
-=======
 
 listbox.bind("<Double-Button-1>", fileSelection)
 playbutton.bind("<Button-1>",fileSelection)
@@ -139,4 +119,3 @@ stopbutton.bind("<Button-1>",stopsong)
 songlabel.pack()
 
 root.mainloop()
->>>>>>> 33974d8f54037c695ad783cf1401efa98f6e51c1
