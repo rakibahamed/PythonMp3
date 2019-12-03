@@ -43,17 +43,19 @@ def directoryChooser():
     pygame.mixer.music.load(listofsongs[0])
     pygame.mixer.music.play()
     #pygame.mixer.music.stop()
+    create_listbox()
+
+def create_listbox():
+    listbox = Listbox(root)
+    for i in range(0, len(listofsongs)):
+        listbox.insert(i, listofsongs[i])
+    listbox.pack()
+
+
 
 lable = Label(root, text = "Music Player")
 lable.pack()
 
-listbox = Listbox(root)
-listbox.pack()
-
-listofsongs.reverse()
-
-for items in listofsongs:
-    listbox.insert(0,items)
 
 listofsongs.reverse()
 
@@ -75,7 +77,4 @@ stopButton.bind("<Button-1>", stopSong)
 
 directoryChooser()
 
-
 root.mainloop()
-
-
