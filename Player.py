@@ -17,8 +17,9 @@ songlabel = Label(root,textvariable=v,width=100)
 
 index = 0
 
+listbox = Listbox(root)
+
 def create_listbox():
-    listbox = Listbox(root)
     for i in range(0, len(listofsongs)):
         listbox.insert(i, listofsongs[i])
     listbox.pack()
