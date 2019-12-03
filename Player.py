@@ -17,6 +17,12 @@ songlabel = Label(root,textvariable=v,width=100)
 
 index = 0
 
+def create_listbox():
+    listbox = Listbox(root)
+    for i in range(0, len(listofsongs)):
+        listbox.insert(i, listofsongs[i])
+    listbox.pack()
+
 def directorychooser():
 
     directory = askdirectory()
@@ -26,15 +32,11 @@ def directorychooser():
         if files.endswith(".mp3"):
 
             realdir = os.path.realpath(files)
-            audio = ID3(realdir)
-            realnames.append(audio['TIT2'].text[0])
-
-
             listofsongs.append(files)
-
 
     pygame.mixer.init()
     pygame.mixer.music.load(listofsongs[0])
+    create_listbox()
 
 directorychooser()
 
@@ -75,17 +77,6 @@ def playsong(event):
 label = Label(root,text='Music Player')
 label.pack()
 
-listbox = Listbox(root, width = 75)
-listbox.pack()
-
-realnames.reverse()
-
-for items in realnames:
-    listbox.insert(0,items)
-
-realnames.reverse()
-
-
 playbutton = Button(root, text = 'Play')
 playbutton.pack()
 
@@ -97,7 +88,6 @@ previousbutton.pack()
 
 stopbutton = Button(root,text='Stop')
 stopbutton.pack()
-
 
 deleteButton = Button(root, text='Delete',command=lambda listbox=listbox: listbox.delete(ANCHOR))
 
