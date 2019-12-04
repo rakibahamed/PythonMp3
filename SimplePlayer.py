@@ -94,8 +94,11 @@ def createButtons():
     qbutton = Button(root, text = 'Queue')
     qbutton.pack()
 
-    fileButton = Button(root, text = 'Export Playlist')
+    fileButton = Button(root, text = 'Sort File')
     fileButton.pack()
+
+    playlistButton = Button(root, text = 'Export Playlist')
+    playlistButton.pack()
 
     listbox.bind("<Double-Button-1>", qSong)
     playbutton.bind("<Button-1>", playsong)
@@ -103,6 +106,7 @@ def createButtons():
     stopbutton.bind("<Button-1>",stopsong)
     qbutton.bind("<Button-1>",qSong)
     fileButton.bind("<Button-1>", inputFile)
+    playlistButton.bind("<Button-1>", exportPlaylist)
 
 def inputFile(event):
 
@@ -119,8 +123,16 @@ def inputFile(event):
 
     lineList = open(root.fileName).readlines()
     quickSort(lineList)
-    f = open("Playlist.txt", "w")
+    f = open("inputFileSort.txt", "w")
     f.writelines(lineList)
+
+def exportPlaylist(event):
+    playlist = realnames
+    quickSort(playlist)
+
+    with open('Playlist.txt', 'w') as playlistfile:
+        playlistfile.writelines("%s\n" % p for p in playlist)
+
 
 def quickSort(alist):
    quickSortHelper(alist,0,len(alist)-1)
