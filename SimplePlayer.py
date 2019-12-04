@@ -3,7 +3,7 @@ from tkinter.filedialog import askdirectory
 import pygame
 from mutagen.id3 import ID3
 from tkinter import *
-
+from tkinter import filedialog
 
 root = Tk()
 #root.minsize(600,300)
@@ -94,28 +94,92 @@ def createButtons():
     qbutton = Button(root, text = 'Queue')
     qbutton.pack()
 
+    fileButton = Button(root, text = 'Export Playlist')
+    fileButton.pack()
+
     listbox.bind("<Double-Button-1>", qSong)
     playbutton.bind("<Button-1>", playsong)
     previousbutton.bind("<Button-1>",prevsong)
     stopbutton.bind("<Button-1>",stopsong)
     qbutton.bind("<Button-1>",qSong)
+    fileButton.bind("<Button-1>", inputFile)
+
+def inputFile(event):
+
+    root.fileName = filedialog.askopenfilename(filetypes=(("Test File", ".txt"), ("All files","*.*")))
+
+    print(root.fileName)
+    root.title(root.fileName)
+    text1 = open(root.fileName).read()
+
+
+    T = Text(root, height=15, width=60)
+    T.pack()
+    T.insert(END,text1)
+
+    lineList = open(root.fileName).readlines()
+    quickSort(lineList)
+    f = open("Playlist.txt", "w")
+    f.writelines(lineList)
+
+def quickSort(alist):
+   quickSortHelper(alist,0,len(alist)-1)
+
+def quickSortHelper(alist,first,last):
+   if first<last:
+
+       splitpoint = partition(alist,first,last)
+
+       quickSortHelper(alist,first,splitpoint-1)
+       quickSortHelper(alist,splitpoint+1,last)
+
+
+def partition(alist,first,last):
+   pivotvalue = alist[first]
+
+   leftmark = first+1
+   rightmark = last
+
+   done = False
+   while not done:
+
+       while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
+           leftmark = leftmark + 1
+
+       while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
+           rightmark = rightmark -1
+
+       if rightmark < leftmark:
+           done = True
+       else:
+           temp = alist[leftmark]
+           alist[leftmark] = alist[rightmark]
+           alist[rightmark] = temp
+
+   temp = alist[first]
+   alist[first] = alist[rightmark]
+   alist[rightmark] = temp
+
+
+   return rightmark
+
 
 
 
 
 label = Label(root,text='Music Selection')
 label.pack()
-listbox = Listbox(root, width = 75)
+listbox = Listbox(root, width = 75,height=5)
 listbox.pack()
 
 qlabel = Label(root,text='Playlist')
 qlabel.pack()
-qbox = Listbox(root, width = 75)
+qbox = Listbox(root, width = 75,height=5,)
 qbox.pack()
 
 hlabel = Label(root,text='Music History')
 hlabel.pack()
-hbox = Listbox(root, width = 75)
+hbox = Listbox(root, width = 75,height=5,)
 hbox.pack()
 
 
