@@ -6,7 +6,6 @@ from tkinter import *
 from tkinter import filedialog
 
 root = Tk()
-#root.minsize(600,300)
 
 hlist = []
 qlist = []
@@ -117,7 +116,7 @@ def inputFile(event):
     text1 = open(root.fileName).read()
 
 
-    T = Text(root, height=15, width=60)
+    T = Text(root, height=15, width=70)
     T.pack()
     T.insert(END,text1)
 
